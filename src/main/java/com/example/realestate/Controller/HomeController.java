@@ -67,7 +67,7 @@ public class HomeController {
             model.addAttribute("user", Objects.requireNonNullElseGet(curUser, User::new));
         }
         else {
-            model.addAttribute("user", new User());
+            model.addAttribute("user", null);
         }
     }
 
