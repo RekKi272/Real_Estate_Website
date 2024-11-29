@@ -3,9 +3,14 @@ package com.example.realestate.Service;
 import com.example.realestate.Model.User;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface UserService {
     void saveUser(User user);
     boolean isEmailExist(String email);
     User getUserByEmail(String email);
+    List<User> getAllUsers();
+    List<User> getUserByRole(String role);
+    Boolean updateUserAccess(Long id, Boolean status);
 }

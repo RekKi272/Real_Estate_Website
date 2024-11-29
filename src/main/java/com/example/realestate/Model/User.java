@@ -3,6 +3,8 @@ package com.example.realestate.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
@@ -14,6 +16,9 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -31,4 +36,7 @@ public class User {
 
     @Column(nullable = false)
     private Boolean isEnable;
+
+    @OneToMany(mappedBy = "postedBy", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Property> properties; // List of properties posted by the user
 }
