@@ -3,7 +3,6 @@ package com.example.realestate.Model;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -11,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Data
 public class Property {
@@ -62,9 +60,32 @@ public class Property {
     @Column(nullable = false)
     private Boolean isPublic; // must be verified by admin before public
 
+    // Amenities of property
     @Column(nullable = false)
+    private Boolean hasLift;
+
+    @Column(nullable = false)
+    private Boolean hasPlayground;
+
+    @Column(nullable = false)
+    private Boolean hasGarden;
+
+    @Column(nullable = false)
+    private Boolean hasParkingArea;
+
+    @Column(nullable = false)
+    private Boolean hasShoppingMall;
+
+    @Column(nullable = false)
+    private Boolean hasHospital;
+
+    @Column
+    private Boolean hasSchool;
+
+    // Create date and update
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;
-    @Column(nullable = false)
+
     private LocalDateTime updatedAt;
 
 
@@ -74,5 +95,17 @@ public class Property {
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Image> images;
+
+    // Lifecycle hooks to set timestamps
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        this.updatedAt = LocalDateTime.now();
+    }
 
 }

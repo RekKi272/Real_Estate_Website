@@ -22,10 +22,18 @@
         <nav class="navbar nav-1">
             <section class="flex">
                 <a href="/" class="logo"><i class="fas fa-house"></i>MyHome</a>
+                <th:block th:if="${user == null}">
+                    <ul>
+                        <li><a href="/signin">post property<i class="fas fa-paper-plane"></i></a></li>
+                    </ul>
+                </th:block>
 
-                <ul>
-                    <li><a href="#">post property<i class="fas fa-paper-plane"></i></a></li>
-                </ul>
+                <th:block th:if="${user != null}">
+                    <ul>
+                        <li><a href="/user/post_property">post property<i class="fas fa-paper-plane"></i></a></li>
+                    </ul>
+                </th:block>
+
             </section>
         </nav>
 
@@ -79,7 +87,8 @@
                         <th:block th:if="${user != null}">
                             <ul>
                                 <li><a href="/logout">logout</a></li>
-                                <li th:if="${user.role == 'ROLE_ADMIN'}" th:href="@{/admin/}"> Admin</li>
+                                <li><a href="/user/my_posts">View my post</a></li>
+                                <li th:if="${user.role == 'ROLE_ADMIN'}"><a th:href="@{/admin/}">Admin</a></li>
                             </ul>
                         </th:block>
 
