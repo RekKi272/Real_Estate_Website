@@ -13,4 +13,5 @@ public interface UserService {
     List<User> getAllUsers();
     List<User> getUserByRole(String role);
     Boolean updateUserAccess(Long id, Boolean status);
+    void saveAdmin(User user);
 }

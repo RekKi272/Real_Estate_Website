@@ -68,4 +68,18 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    @Override
+    public void saveAdmin(User admin) {
+
+        admin.setRole("ROLE_ADMIN");
+
+        admin.setPassword(passwordEncoder.encode(admin.getPassword()));
+
+        admin.setIsEnable(true);
+
+        admin.setCheckStatus(true);
+
+        userRepository.save(admin);
+    }
+
 }

@@ -14,6 +14,18 @@ document.querySelectorAll('input[type="number"]').forEach(inputNumber => {
    };
 });
 
+document.querySelector('input[type="file"]').addEventListener('change', function () {
+   const fileList = this.files;
+   if (fileList.length > 0) {
+      console.log(`Selected files: ${fileList.length}`);
+      // You can loop through fileList and show preview images if needed
+      Array.from(fileList).forEach(file => {
+         console.log(file.name);
+      });
+   }
+});
+
+
 document.querySelectorAll('.view-property .details .thumb .small-images img').forEach(images =>{
    images.onclick = () =>{
       src = images.getAttribute('src');

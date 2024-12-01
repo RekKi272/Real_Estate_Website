@@ -7,7 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
-@ToString
 @Entity
 @Data
 public class Image {
@@ -20,5 +19,11 @@ public class Image {
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
+    @ToString.Exclude
     private Property property; // Many images reference for one property
+
+    @Override
+    public String toString() {
+        return "Image{id=" + id + ", url='" + url + "'}";
+    }
 }

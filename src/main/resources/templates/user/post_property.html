@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+  <meta charset="UTF-8">
+  <title>Post Property</title>
+</head>
+<body>
+<section class="filters" style="padding-bottom: 0;">
+  <form action="/user/postProperty" method="post" enctype="multipart/form-data">
+    <h3>Post Your Property</h3>
+    <th:block th:if="${session.successMsg}">
+      <p class="text-success fw-bold">[[${session.successMsg}]]</p>
+      <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+    </th:block >
+
+    <th:block th:if="${session.errorMsg}">
+      <p class="text-warning fw-bold">[[${session.errorMsg}]]</p>
+      <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+    </th:block >
+    <!-- Property Title -->
+    <div class="flex">
+      <div class="box">
+        <p>Enter Title</p>
+        <input type="text" name="title" required maxlength="100" placeholder="Property Title" class="input">
+      </div>
+    </div>
+
+    <div class="flex">
+      <div class="box">
+        <!-- Address -->
+        <p>Enter Address</p>
+        <input type="text" name="address" required maxlength="150" placeholder="Property Address" class="input">
+      </div>
+    </div>
+
+    <!-- Description -->
+    <div class="flex">
+      <div class="box">
+        <p>Enter Description</p>
+        <input type="text" name="description" required maxlength="150" placeholder="Property Description" class="input">
+      </div>
+    </div>
+
+    <!-- Property Type and Service Type -->
+    <div class="flex">
+      <!-- Flex boxes for inputs -->
+      <div class="box">
+        <p>property type <span>*</span></p>
+        <select name="propertyType" class="input" required>
+          <option value="flat">flat</option>
+          <option value="house">house</option>
+          <option value="shop">shop</option>
+        </select>
+      </div>
+      <div class="box">
+        <p>serviceType <span>*</span></p>
+        <select name="serviceType" class="input" required>
+          <option value="Sale">Sale</option>
+          <option value="Rent">Rent</option>
+          <option value="All">Both</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- City and Country -->
+    <div class="flex">
+      <div class="box">
+        <p>City name</p>
+        <input type="text" name="city" required placeholder="City" class="input">
+      </div>
+      <div class="box">
+        <p>Country</p>
+        <input type="text" name="country" required placeholder="Country" class="input">
+      </div>
+    </div>
+
+
+    <!-- Price and Size -->
+    <div class="flex">
+      <div class="box">
+        <p>Price</p>
+        <input type="number" name="price" required placeholder="Price ($)" class="input" maxlength="15">
+      </div>
+      <div class="box">
+        <p>Size</p>
+        <input type="number" name="size" required placeholder="Size (sqft)" class="input" maxlength="15">
+      </div>
+    </div>
+
+
+    <!-- Bedrooms, Bathrooms, Floors, Balcony -->
+    <div class="flex">
+      <div class="box">
+        <p>Number of bedrooms</p>
+        <input type="number" name="bedrooms" required placeholder="Bedrooms" class="input" maxlength="15">
+      </div>
+      <div class="box">
+        <p>Number of bathrooms</p>
+        <input type="number" name="bathrooms" required placeholder="Bathrooms" class="input" maxlength="15">
+      </div>
+      <div class="box">
+        <p>Number of floors</p>
+        <input type="number" name="floors" required placeholder="Floors" class="input" maxlength="15">
+      </div>
+      <div class="box">
+        <p>Number of balcony</p>
+        <input type="number" name="balcony" required placeholder="Balconies" class="input" maxlength="15">
+      </div>
+    </div>
+
+    <!-- Status -->
+    <div class="flex">
+      <div class="box">
+        <p>serviceType <span>*</span></p>
+        <select name="status" class="input" required>
+          <option value="Ready To Move">Ready To Move</option>
+          <option value="Under Construction">Under Construction</option>
+          <option value="Sold">Sold</option>
+        </select>
+      </div>
+    </div>
+    <!-- Amenities (Checkboxes) -->
+    <h3>Amenities</h3>
+    <div class="flex">
+      <div class="box">
+        <label class="checkbox-label">
+          <input type="checkbox" name="hasLift" class="checkbox-input"> Lift</label>
+      </div>
+
+      <div class="box">
+        <label class="checkbox-label">
+          <input type="checkbox" name="hasPlayground" class="checkbox-input"> Playground</label>
+      </div>
+
+      <div class="box">
+        <label class="checkbox-label">
+          <input type="checkbox" name="hasGarden" class="checkbox-input"> Garden</label>
+      </div>
+      <div class="box">
+        <label class="checkbox-label">
+          <input type="checkbox" name="hasParkingArea" class="checkbox-input"> Parking Area</label>
+      </div>
+      <div class="box">
+        <label class="checkbox-label"><input type="checkbox" name="hasShoppingMall" class="checkbox-input"> Shopping Mall</label>
+      </div>
+      <div class="box">
+        <label class="checkbox-label"><input type="checkbox" name="hasHospital" class="checkbox-input"> Hospital</label>
+      </div>
+      <div class="box">
+        <label class="checkbox-label"><input type="checkbox" name="hasSchool" class="checkbox-input"> School</label>
+      </div>
+    </div>
+
+
+    <!-- Image Upload -->
+    <div class="flex">
+      <div class="box">
+        <input type="file" name="files" accept="image/*" multiple class="input">
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn">Post Property</button>
+  </form>
+</section>
+</body>
+</html>

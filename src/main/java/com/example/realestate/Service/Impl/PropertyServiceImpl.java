@@ -1,22 +1,57 @@
 package com.example.realestate.Service.Impl;
 
+import com.example.realestate.Model.Image;
 import com.example.realestate.Model.Property;
+import com.example.realestate.Model.User;
+import com.example.realestate.Repository.ImageRepository;
 import com.example.realestate.Repository.PropertyRepository;
 import com.example.realestate.Service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 public class PropertyServiceImpl implements PropertyService {
 
     @Autowired
-    PropertyRepository propertyRepository;
+    private PropertyRepository propertyRepository;
+
+    @Autowired
+    private ImageRepository imageRepository;
 
     @Override
     public List<Property> listPropertyByIsPublic(Boolean isPublic){
         return propertyRepository.findPropertiesByIsPublic(isPublic);
+    }
+
+    @Override
+    public void saveProperty(Property property, MultipartFile[] images) throws IOException {
+
+        propertyRepository.save(property);
+
+        List<Image> imageList = new ArrayList<Image>();
+
+        // Save images to database or file system
+        for (MultipartFile file : images) {
+            if(!file.isEmpty()){
+                Image image = new Image();
+                image.setProperty(property); // Link to property
+                image.setUrl(file.getOriginalFilename());
+                imageList.add(image);
+            }
+        }
+
+        property.setImages(imageList);
+        imageRepository.saveAll(imageList);
+    }
+
+    @Override
+    public List<Property> getListPropertyByUser(User user){
+        return propertyRepository.findPropertyByPostedBy(user);
     }
 
 }
