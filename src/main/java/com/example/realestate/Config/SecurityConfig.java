@@ -44,7 +44,6 @@ public class SecurityConfig {
     {
         http.csrf(AbstractHttpConfigurer::disable).cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req->req
-                        .requestMatchers("/user/**").hasRole("USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/**").permitAll())
                 .formLogin(form->form.loginPage("/signin")

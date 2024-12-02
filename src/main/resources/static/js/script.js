@@ -26,12 +26,15 @@ document.querySelector('input[type="file"]').addEventListener('change', function
 });
 
 
-document.querySelectorAll('.view-property .details .thumb .small-images img').forEach(images =>{
-   images.onclick = () =>{
-      src = images.getAttribute('src');
-      document.querySelector('.view-property .details .thumb .big-image img').src = src;
-   }
+document.addEventListener('DOMContentLoaded', function() {
+   document.querySelectorAll('.view-property .details .thumb .small-images img').forEach(image => {
+      image.onclick = () => {
+         // Get the clicked image's source and update the big image
+         document.querySelector('.view-property .details .thumb .big-image img').src = image.getAttribute('src');
+      };
+   });
 });
+
 
 document.querySelectorAll('.faq .box-container .box h3').forEach(headings =>{
    headings.onclick = () =>{

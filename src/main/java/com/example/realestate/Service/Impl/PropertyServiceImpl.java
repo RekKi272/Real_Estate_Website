@@ -54,4 +54,38 @@ public class PropertyServiceImpl implements PropertyService {
         return propertyRepository.findPropertyByPostedBy(user);
     }
 
+    @Override
+    public List<Property> getAllProperty(){
+        return propertyRepository.findAll();
+    }
+
+    @Override
+    public Property getPropertyById(Long id){
+        return propertyRepository.findById(id).get();
+    }
+
+    @Override
+    public void save(Property property) {
+        propertyRepository.save(property);
+    }
+
+    @Override
+    public List<Image> saveImages(Property property, MultipartFile[] images) throws IOException {
+        List<Image> imageList = new ArrayList<>();
+        for (MultipartFile file : images) {
+            if (!file.isEmpty()) {
+                Image image = new Image();
+                image.setProperty(property);
+                image.setUrl(file.getOriginalFilename());
+                imageList.add(image);
+            }
+        }
+        imageRepository.saveAll(imageList);
+        return imageList;
+    }
+
+    @Override
+    public List<Property> latestPublicProperty(){
+        return propertyRepository.findPublicPropertiesOrderedByCreatedAt();
+    }
 }
