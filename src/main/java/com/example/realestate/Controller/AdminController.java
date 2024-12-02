@@ -1,12 +1,16 @@
 package com.example.realestate.Controller;
 
+import com.example.realestate.Model.Image;
+import com.example.realestate.Model.Property;
 import com.example.realestate.Model.User;
+import com.example.realestate.Service.PropertyService;
 import com.example.realestate.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.util.List;
@@ -18,6 +22,9 @@ public class AdminController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private PropertyService propertyService;
 
     @ModelAttribute
     public void getUserInfo(Principal p, Model model) {
@@ -69,6 +76,27 @@ public class AdminController {
         return "admin/add_admin";
     }
 
+    @GetMapping(value = "/posts")
+    public String postListing(Model model) {
+        List<Property> propertyList = propertyService.getAllProperty();
+        model.addAttribute("propertyList", propertyList);
+        return "admin/post_management";
+    }
+
+    @GetMapping(value = "/view_property")
+    public String view_property(Model model, @RequestParam Long pid) {
+        Property property = propertyService.getPropertyById(pid);
+        model.addAttribute("post", property);
+        return "/admin/post_detail";
+    }
+
+    @GetMapping(value = "/edit_property")
+    public String view_edit_my_property(Model model, @RequestParam("pid") Long pid) {
+        Property property = propertyService.getPropertyById(pid);
+        model.addAttribute("property", property);
+        return "admin/edit_post";
+    }
+
     @PostMapping(value = "/saveAdmin")
     public String saveAdmin(@ModelAttribute User user, @RequestParam("confirmPassword") String confirmPassword,HttpSession session) {
 
@@ -91,4 +119,57 @@ public class AdminController {
         session.setAttribute("successMsg", "Registration Successful");
         return "redirect:/admin/add_admin";
     }
+
+    @PostMapping(value = "/edit_property")
+    public String edit_property(@ModelAttribute Property property,
+                                @RequestParam(value = "images", required = false) MultipartFile[] images ,
+                                HttpSession session) {
+        try {
+            // Fetch the existing property from the database.
+            Property curProperty = propertyService.getPropertyById(property.getId());
+
+            // Update property fields only if provided.
+            curProperty.setTitle(property.getTitle() != null ? property.getTitle() : curProperty.getTitle());
+            curProperty.setAddress(property.getAddress() != null ? property.getAddress() : curProperty.getAddress());
+            curProperty.setDescription(property.getDescription() != null ? property.getDescription() : curProperty.getDescription());
+            curProperty.setPropertyType(property.getPropertyType() != null ? property.getPropertyType() : curProperty.getPropertyType());
+            curProperty.setServiceType(property.getServiceType() != null ? property.getServiceType() : curProperty.getServiceType());
+            curProperty.setCity(property.getCity() != null ? property.getCity() : curProperty.getCity());
+            curProperty.setCountry(property.getCountry() != null ? property.getCountry() : curProperty.getCountry());
+            curProperty.setPrice(property.getPrice() != null ? property.getPrice() : curProperty.getPrice());
+            curProperty.setBedrooms(property.getBedrooms() != null ? property.getBedrooms() : curProperty.getBedrooms());
+            curProperty.setBathrooms(property.getBathrooms() != null ? property.getBathrooms() : curProperty.getBathrooms());
+            curProperty.setFloors(property.getFloors() != null ? property.getFloors() : curProperty.getFloors());
+            curProperty.setBalcony(property.getBalcony() != null ? property.getBalcony() : curProperty.getBalcony());
+            curProperty.setSize(property.getSize() != null ? property.getSize() : curProperty.getSize());
+            curProperty.setStatus(property.getStatus() != null ? property.getStatus() : curProperty.getStatus());
+
+
+            // Update amenities with defaults to false.
+            curProperty.setHasLift(property.getHasLift() != null ? property.getHasLift() : false);
+            curProperty.setHasPlayground(property.getHasPlayground() != null ? property.getHasPlayground() : false);
+            curProperty.setHasGarden(property.getHasGarden() != null ? property.getHasGarden() : false);
+            curProperty.setHasParkingArea(property.getHasParkingArea() != null ? property.getHasParkingArea() : false);
+            curProperty.setHasShoppingMall(property.getHasShoppingMall() != null ? property.getHasShoppingMall() : false);
+            curProperty.setHasHospital(property.getHasHospital() != null ? property.getHasHospital() : false);
+            curProperty.setHasSchool(property.getHasSchool() != null ? property.getHasSchool() : false);
+            curProperty.setIsPublic(property.getIsPublic() != null ? property.getIsPublic() : false);
+            // Update images if provided.
+            if (images != null && images.length > 0) {
+                List<Image> newImages = propertyService.saveImages(curProperty, images);
+                curProperty.setImages(newImages);
+            }
+
+            // Save the updated property.
+            propertyService.save(curProperty);
+
+            session.setAttribute("successMsg", "Property updated successfully!");
+            return "redirect:/admin/view_property?pid=" + curProperty.getId();
+
+        } catch (Exception e) {
+            session.setAttribute("errorMsg", "Error updating property: " + e.getMessage());
+            return "redirect:/admin/view_property?pid=" + property.getId();
+        }
+    }
+
 }

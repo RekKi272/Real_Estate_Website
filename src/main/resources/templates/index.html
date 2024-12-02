@@ -96,94 +96,33 @@
 
     <section class="listings">
 
-        <h1 class="heading">latest listings</h1>
-
+        <h1 class="heading">Listings</h1>
         <div class="box-container">
-
-            <div class="box">
-                <div class="admin">
-                    <h3>j</h3>
-                    <div>
-                        <p>john deo</p>
-                        <span>10-11-2022</span>
+            <th:block th:each="post, p:${publicPost}">
+                <div class="box">
+                    <div class="admin">
+                        <h3>[[${post.postedBy.name[0]}]]</h3>
+                        <div>
+                            <p>[[${post.postedBy.name}]]</p>
+                            <span>[[${post.createdAt}]]</span>
+                        </div>
                     </div>
-                </div>
-                <div class="thumb">
-                    <p class="total-images"><i class="far fa-image"></i><span>4</span></p>
-                    <p class="type"><span>house</span><span>sale</span></p>
-                    <form action="" method="post" class="save">
-                        <button type="submit" name="save" class="far fa-heart"></button>
-                    </form>
-                    <img src="/images/house-img-1.webp" alt="">
-                </div>
-                <h3 class="name">modern flats and appartments</h3>
-                <p class="location"><i class="fas fa-map-marker-alt"></i><span>andheri, mumbai, india - 401303</span></p>
-                <div class="flex">
-                    <p><i class="fas fa-bed"></i><span>3</span></p>
-                    <p><i class="fas fa-bath"></i><span>2</span></p>
-                    <p><i class="fas fa-maximize"></i><span>750sqft</span></p>
-                </div>
-                <a href="view_property.html" class="btn">view property</a>
-            </div>
-
-            <div class="box">
-                <div class="admin">
-                    <h3>j</h3>
-                    <div>
-                        <p>john deo</p>
-                        <span>10-11-2022</span>
+                    <div class="thumb">
+                        <p class="total-images"><i class="far fa-image"></i><span>[[${post.images.size}]]</span></p>
+                        <p class="type"><span>[[${post.propertyType}]]</span><span>[[${post.serviceType}]]</span></p>
+                        <img th:src="@{'/images/'+${post.images[0].url}}" alt="">
                     </div>
-                </div>
-                <div class="thumb">
-                    <p class="total-images"><i class="far fa-image"></i><span>4</span></p>
-                    <p class="type"><span>flat</span><span>sale</span></p>
-                    <form action="" method="post" class="save">
-                        <button type="submit" name="save" class="far fa-heart"></button>
-                    </form>
-                    <img src="/images/house-img-2.webp" alt="">
-                </div>
-                <h3 class="name">modern flats and appartments</h3>
-                <p class="location"><i class="fas fa-map-marker-alt"></i><span>andheri, mumbai, india - 401303</span></p>
-                <div class="flex">
-                    <p><i class="fas fa-bed"></i><span>3</span></p>
-                    <p><i class="fas fa-bath"></i><span>2</span></p>
-                    <p><i class="fas fa-maximize"></i><span>750sqft</span></p>
-                </div>
-                <a href="view_property.html" class="btn">view property</a>
-            </div>
-
-            <div class="box">
-                <div class="admin">
-                    <h3>j</h3>
-                    <div>
-                        <p>john deo</p>
-                        <span>10-11-2022</span>
+                    <h3 class="name">[[${post.title}]]</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i><span>[[${post.address}]]</span></p>
+                    <div class="flex">
+                        <p><i class="fas fa-bed"></i><span>[[${post.bedrooms}]]</span></p>
+                        <p><i class="fas fa-bath"></i><span>[[${post.bathrooms}]]</span></p>
+                        <p><i class="fas fa-maximize"></i><span>[[${post.size}]] sqft</span></p>
                     </div>
+                    <a th:href="@{'/view_property?pid=' + ${post.id}}" class="btn">view property</a>
                 </div>
-                <div class="thumb">
-                    <p class="total-images"><i class="far fa-image"></i><span>4</span></p>
-                    <p class="type"><span>flat</span><span>sale</span></p>
-                    <form action="" method="post" class="save">
-                        <button type="submit" name="save" class="far fa-heart"></button>
-                    </form>
-                    <img src="/images/house-img-3.jpg" alt="">
-                </div>
-                <h3 class="name">modern flats and appartments</h3>
-                <p class="location"><i class="fas fa-map-marker-alt"></i><span>andheri, mumbai, india - 401303</span></p>
-                <div class="flex">
-                    <p><i class="fas fa-bed"></i><span>3</span></p>
-                    <p><i class="fas fa-bath"></i><span>2</span></p>
-                    <p><i class="fas fa-maximize"></i><span>750sqft</span></p>
-                </div>
-                <a href="view_property.html" class="btn">view property</a>
-            </div>
-
+            </th:block>
         </div>
-
-        <div style="margin-top: 2rem; text-align:center;">
-            <a href="listings.html" class="inline-btn">view all</a>
-        </div>
-
     </section>
 
     <!-- listings section ends -->

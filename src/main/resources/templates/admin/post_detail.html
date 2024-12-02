@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/admin_base::layout(~{::body})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <!-- font awesome cdn link  -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+  <!-- custom css file link  -->
+  <link rel="stylesheet" href="/css/style.css">
+
+  <section class="view-property">
+    <div class="details">
+      <div class="thumb">
+        <div class="big-image">
+          <img th:src="@{'/images/' +${post.images[0].url}}" alt="">
+        </div>
+        <div class="small-images">
+          <th:block th:each="image, i:${post.images}">
+            <img th:src="@{'/images/' + ${image.url}}" alt="">
+          </th:block>
+        </div>
+      </div>
+      <h3 class="name">[[${post.title}]]</h3>
+      <p class="location"><i class="fas fa-map-marker-alt"></i><span>[[${post.address}]]</span></p>
+      <div class="info">
+        <p><i class="fas fa-tag"></i><span>[[${post.price}]]$</span></p>
+        <p><i class="fas fa-user"></i><span>[[${post.postedBy.name}]]</span></p>
+        <p><i class="fas fa-phone"></i><a>[[${post.postedBy.phone}]]</a></p>
+        <p><i class="fas fa-building"></i><span>[[${post.propertyType}]]</span></p>
+        <p><i class="fas fa-house"></i><span>[[${post.serviceType}]]</span></p>
+        <p><i class="fas fa-calendar"></i><span>[[${post.createdAt}]]</span></p>
+      </div>
+      <h3 class="title">details</h3>
+      <div class="flex">
+        <div class="box">
+          <p><i>status :</i><span>[[${post.status}]]</span></p>
+          <p><i>bedroom :</i><span>[[${post.bedrooms}]]</span></p>
+          <p><i>bathroom :</i><span>[[${post.bathrooms}]]</span></p>
+          <p><i>balcony :</i><span>[[${post.balcony}]]</span></p>
+        </div>
+        <div class="box">
+          <p><i>carpet area :</i><span>[[${post.size}]]</span></p>
+          <p><i>total floors :</i><span>[[${post.floors}]]</span></p>
+        </div>
+      </div>
+      <h3 class="title">amenities</h3>
+      <div class="flex">
+        <div class="box">
+          <p><i th:class="${post.hasLift} ? 'fas fa-check' : 'fas fa-times'"></i><span>lifts</span></p>
+          <p><i th:class="${post.hasPlayground} ? 'fas fa-check' : 'fas fa-times'"></i><span>play ground</span></p>
+          <p><i th:class="${post.hasGarden} ? 'fas fa-check' : 'fas fa-times'"></i><span>gardens</span></p>
+          <p><i th:class="${post.hasParkingArea} ? 'fas fa-check' : 'fas fa-times'"></i><span>parking area</span></p>
+        </div>
+        <div class="box">
+          <p><i th:class="${post.hasShoppingMall} ? 'fas fa-check' : 'fas fa-times'"></i><span>shopping mall</span></p>
+          <p><i th:class="${post.hasHospital} ? 'fas fa-check' : 'fas fa-times'"></i><span>hospital</span></p>
+          <p><i th:class="${post.hasSchool} ? 'fas fa-check' : 'fas fa-times'"></i><span>schools</span></p>
+        </div>
+      </div>
+      <h3 class="title">description</h3>
+      <p class="description">[[${post.description}]]</p>
+
+      <h3 class="title">Is Public</h3>
+      <div class="flex">
+        <div class="box">
+          <p><i th:class="${post.isPublic} ? 'fas fa-check' : 'fas fa-times'"></i><span>Public</span></p>
+        </div>
+      </div>
+      <a th:href="@{'/admin/edit_property?pid=' + ${post.id}}" class="btn">Edit property</a>
+    </div>
+  </section>
+</body>
+</html>

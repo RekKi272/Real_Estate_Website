@@ -1,7 +1,9 @@
 package com.example.realestate.Controller;
 
+import com.example.realestate.Model.Property;
 import com.example.realestate.Model.User;
 import com.example.realestate.Service.CommonService;
+import com.example.realestate.Service.PropertyService;
 import com.example.realestate.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Controller
 public class HomeController {
@@ -24,8 +28,17 @@ public class HomeController {
     @Autowired
     private CommonService commonService;
 
+    @Autowired
+    private PropertyService propertyService;
+
     @GetMapping(value = "/")
-    public String home() {
+    public String home(Model model) {
+        List<Property> publicPost = propertyService.latestPublicProperty();
+        // Get the first three properties, if available
+        List<Property> topThree = publicPost.stream()
+                .limit(3)
+                .toList();
+        model.addAttribute("publicPost", topThree);
         return "index";
     }
 
@@ -45,7 +58,9 @@ public class HomeController {
     }
 
     @GetMapping(value = "/listing")
-    public String listing() {
+    public String listing(Model model) {
+        List<Property> publicPost = propertyService.latestPublicProperty();
+        model.addAttribute("publicPost", publicPost);
         return "listings";
     }
 
@@ -69,6 +84,13 @@ public class HomeController {
         else {
             model.addAttribute("user", null);
         }
+    }
+
+    @GetMapping(value = "/view_property")
+    public String viewProperty(Model model, @RequestParam Long pid) {
+        Property property = propertyService.getPropertyById(pid);
+        model.addAttribute("post", property);
+        return "view_property";
     }
 
     @PostMapping(value = "/saveUser")
