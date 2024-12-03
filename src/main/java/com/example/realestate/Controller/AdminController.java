@@ -21,7 +21,7 @@ import java.util.Objects;
 public class AdminController {
 
     @Autowired
-    UserService userService;
+    private UserService userService;
 
     @Autowired
     private PropertyService propertyService;

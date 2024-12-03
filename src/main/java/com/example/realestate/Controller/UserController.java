@@ -39,7 +39,7 @@ public class UserController {
             model.addAttribute("user", Objects.requireNonNullElseGet(curUser, User::new));
         }
         else {
-            model.addAttribute("user", null);
+            model.addAttribute("user", new User());
         }
     }
 

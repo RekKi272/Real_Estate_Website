@@ -14,16 +14,21 @@ document.querySelectorAll('input[type="number"]').forEach(inputNumber => {
    };
 });
 
-document.querySelector('input[type="file"]').addEventListener('change', function () {
-   const fileList = this.files;
-   if (fileList.length > 0) {
-      console.log(`Selected files: ${fileList.length}`);
-      // You can loop through fileList and show preview images if needed
-      Array.from(fileList).forEach(file => {
-         console.log(file.name);
+document.addEventListener('DOMContentLoaded', function () {
+   const fileInput = document.querySelector('input[type="file"]');
+   if (fileInput) {
+      fileInput.addEventListener('change', function () {
+         const fileList = this.files;
+         if (fileList.length > 0) {
+            console.log(`Selected files: ${fileList.length}`);
+            Array.from(fileList).forEach(file => {
+               console.log(file.name);
+            });
+         }
       });
    }
 });
+
 
 
 document.addEventListener('DOMContentLoaded', function() {

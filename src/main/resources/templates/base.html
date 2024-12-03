@@ -22,16 +22,29 @@
         <nav class="navbar nav-1">
             <section class="flex">
                 <a href="/" class="logo"><i class="fas fa-house"></i>MyHome</a>
+                <!-- If user is not logged in -->
                 <th:block th:if="${user == null}">
                     <ul>
                         <li><a href="/signin">post property<i class="fas fa-paper-plane"></i></a></li>
                     </ul>
                 </th:block>
 
+                <!-- Check if user is logged in and has not bought a package -->
                 <th:block th:if="${user != null}">
-                    <ul>
-                        <li><a href="/user/post_property">post property<i class="fas fa-paper-plane"></i></a></li>
-                    </ul>
+                    <th:block th:if="${user.checkStatus == false}">
+                        <ul>
+                            <li>
+                                <a href="#" onclick="showPackageWarning()">post property<i class="fas fa-paper-plane"></i></a>
+                            </li>
+                        </ul>
+                    </th:block>
+                    <th:block th:if="${user.checkStatus == true}">
+                        <ul>
+                            <li>
+                                <a href="/user/post_property">post property<i class="fas fa-paper-plane"></i></a>
+                            </li>
+                        </ul>
+                    </th:block>
                 </th:block>
 
             </section>
@@ -69,11 +82,17 @@
                                 <li><a href="/contact">contact us</a></i></li>
                             </ul>
                         </li>
+                        <li><a href="/service_detail">Sign up for service package <i class="fas fa-angle"></i></a>
                     </ul>
                 </div>
 
                 <ul>
-                    <li><a href="#">account <i class="fas fa-angle-down"></i></a>
+                    <th:block th:if="${user != null and user.email != ''}">
+                        <li><a href="#">[[${user.name}]] <i class="fas fa-angle-down"></i></a>
+                    </th:block>
+                    <th:block th:if="${user == null or user.email == ''}">
+                        <li><a href="#">Account <i class="fas fa-angle-down"></i></a>
+                    </th:block>
 
                         <th:block th:if="${user == null}">
                             <ul>
@@ -137,6 +156,12 @@
 
     <!-- custom js file link  -->
     <script src="/js/script.js"></script>
-
+    <!-- JavaScript function to show a warning and redirect -->
+    <script>
+        function showPackageWarning() {
+            alert("You must buy a service package before posting a property.");
+            window.location.href = "/service_detail"; // Redirect to the service package page
+        }
+    </script>
 </body>
 </html>

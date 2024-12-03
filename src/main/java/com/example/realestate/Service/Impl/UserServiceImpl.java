@@ -1,6 +1,8 @@
 package com.example.realestate.Service.Impl;
 
 import com.example.realestate.Model.User;
+import com.example.realestate.Model.User_Package;
+import com.example.realestate.Repository.UserPackageRepository;
 import com.example.realestate.Repository.UserRepository;
 import com.example.realestate.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,11 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserPackageRepository UserPackageRepository;
+    @Autowired
+    private UserPackageRepository userPackageRepository;
 
     @Override
     public void saveUser(User user) {
@@ -80,6 +87,16 @@ public class UserServiceImpl implements UserService {
         admin.setCheckStatus(true);
 
         userRepository.save(admin);
+    }
+
+    @Override
+    public void saveUserPackage(User_Package userPackage){
+        userPackageRepository.save(userPackage);
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 
 }
