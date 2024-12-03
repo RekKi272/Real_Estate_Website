@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{base::layout(~{::body})}">
+<head>
+  <meta charset="UTF-8">
+  <title>Buy Service</title>
+</head>
+<body>
+<!-- Payment form -->
+<section class="filters" style="padding-bottom: 0;">
+  <form id="paymentForm" action="/payment/create" method="post">
+    <h3>Payment Service</h3>
+
+    <th:block th:if="${session.successMsg}">
+      <p class="text-success fw-bold">[[${session.successMsg}]]</p>
+      <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+    </th:block >
+
+    <th:block th:if="${session.errorMsg}">
+      <p class="text-warning fw-bold">[[${session.errorMsg}]]</p>
+      <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+    </th:block >
+
+    <div class="flex">
+      <div class="box">
+        <p>Payment method</p>
+        <input id="method" type="text" name="method" required maxlength="100" class="input" value="Paypal" readonly>
+      </div>
+    </div>
+
+    <div class="flex">
+      <div class="box">
+        <p>Choose your package <span>*</span></p>
+        <select id="packageSelect" name="packageId" class="input" required onchange="updatePackageDetails()">
+          <option value="">Select a Package</option>
+          <th:block th:each="pkg : ${packageList}">
+            <option th:value="${pkg.id}"
+                    th:data-name="${pkg.name}"
+                    th:data-description="${pkg.description}"
+                    th:data-price="${pkg.price}"
+                    th:data-currency="USD">
+              [[${pkg.name}]]
+            </option>
+          </th:block>
+        </select>
+      </div>
+    </div>
+
+    <div class="flex" id="packageDetails"></div>
+
+    <div class="flex">
+      <div class="box">
+        <p>Enter description</p>
+        <input type="text" name="description" required maxlength="100" placeholder="Description" class="input">
+      </div>
+    </div>
+
+    <input type="hidden" id="amount" name="amount">
+    <input type="hidden" id="currency" name="currency" value="USD">
+    <input type="hidden" id="packageId" name="packageId">
+
+    <th:block th:if="${user != null and user.name !=''}">
+      <button type="submit" class="btn">Pay with Paypal</button>
+    </th:block>
+    <th:block th:if="${user == null or user.name ==''}">
+      <a class="btn" href="/signin"> Pay with Paypal</a>
+    </th:block>
+  </form>
+</section>
+
+<script>
+  function updatePackageDetails() {
+    var selectedOption = document.getElementById("packageSelect").selectedOptions[0];
+    var packageDetails = document.getElementById("packageDetails");
+    packageDetails.innerHTML = '';
+
+    if (selectedOption) {
+      var name = selectedOption.getAttribute('data-name');
+      var description = selectedOption.getAttribute('data-description');
+      var price = selectedOption.getAttribute('data-price');
+      var currency = selectedOption.getAttribute('data-currency');
+      var id = selectedOption.getAttribute('value');
+
+      document.getElementById("amount").value = price;
+      document.getElementById("currency").value = currency;
+      document.getElementById("packageId").value = id;
+
+      packageDetails.innerHTML = `
+        <div class="box">
+          <p><strong>Name:</strong> <span class="text-normal">${name}</span></p>
+          <p><strong>Description:</strong> <span class="text-normal">${description}</span></p>
+          <p><strong>Price:</strong> <span class="text-normal">$${price}</span></p>
+          <p><strong>Currency:</strong> <span class="text-normal">${currency}</span></p>
+        </div>
+      `;
+    }
+  }
+
+</script>
+
+</body>
+</html>

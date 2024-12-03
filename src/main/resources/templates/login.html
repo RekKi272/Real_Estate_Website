@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-      th:replace="~{base::layout(~{::section})}">
+      th:replace="~{base::layout(~{::body})}">
 <head>
     <meta charset="UTF-8">
     <title>Login page</title>
 </head>
 <body>
+
+    <th:block th:if="${user != null and user.name != ''}">
+        <script>
+            window.location.href = '/'; // Redirect to homepage or another page
+        </script>
+    </th:block>
+
     <section class="form-container">
 
         <!-- login section starts  -->

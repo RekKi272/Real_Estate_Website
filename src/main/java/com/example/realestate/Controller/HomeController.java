@@ -2,7 +2,9 @@ package com.example.realestate.Controller;
 
 import com.example.realestate.Model.Property;
 import com.example.realestate.Model.User;
+import com.example.realestate.Model.Package;
 import com.example.realestate.Service.CommonService;
+import com.example.realestate.Service.PackageService;
 import com.example.realestate.Service.PropertyService;
 import com.example.realestate.Service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -30,6 +32,9 @@ public class HomeController {
 
     @Autowired
     private PropertyService propertyService;
+
+    @Autowired
+    private PackageService packageService;
 
     @GetMapping(value = "/")
     public String home(Model model) {
@@ -74,15 +79,19 @@ public class HomeController {
         return "register";
     }
 
+    @GetMapping(value = "/service_detail")
+    public String service_detail(Model model) {
+        List<Package> packageList = packageService.getAllPackages();
+        model.addAttribute("packageList", packageList);
+        return "buy_service";
+    }
+
     @ModelAttribute
     public void getUserInfo(Principal p, Model model) {
         if (p != null) {
             String username = p.getName();
             User curUser = userService.getUserByEmail(username);
             model.addAttribute("user", Objects.requireNonNullElseGet(curUser, User::new));
-        }
-        else {
-            model.addAttribute("user", null);
         }
     }
 
