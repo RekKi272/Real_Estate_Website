@@ -157,5 +157,13 @@ public class UserController {
         }
     }
 
+    @GetMapping(value = "/delete")
+    public String deleteProperties(@RequestParam(value = "id") Long id,Principal p){
+        if(p != null) {
+            Property property = propertyService.getPropertyById(id);
+            propertyService.delete(property);
+        }
+        return "redirect:/user/my_posts";
+    }
 
 }

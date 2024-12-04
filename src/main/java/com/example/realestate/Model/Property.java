@@ -25,7 +25,7 @@ public class Property {
 
     private String description;
 
-    private String propertyType; // Flat, Building, etc
+    private String propertyType; // Flat, Building, House, etc
 
     @Column(nullable = false)
     private String serviceType; // for sale, rent, etc

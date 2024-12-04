@@ -50,6 +50,11 @@ public class PropertyServiceImpl implements PropertyService {
     }
 
     @Override
+    public void delete(Property property) {
+        propertyRepository.delete(property);
+    }
+
+    @Override
     public List<Property> getListPropertyByUser(User user){
         return propertyRepository.findPropertyByPostedBy(user);
     }
@@ -87,5 +92,37 @@ public class PropertyServiceImpl implements PropertyService {
     @Override
     public List<Property> latestPublicProperty(){
         return propertyRepository.findPublicPropertiesOrderedByCreatedAt();
+    }
+
+    @Override
+    public List<Property> getFilteredProperties(String category,
+                                                String serviceType,
+                                                String status){
+        if(category != null && serviceType != null){
+            return propertyRepository.findByPropertyTypeIgnoreCaseAndServiceTypeIgnoreCaseAndIsPublicTrue(category, serviceType);
+        } else{
+            return propertyRepository.findByStatusIgnoreCaseAndIsPublicTrue(status);
+        }
+    }
+
+    @Override
+    public  List<Property> getSearchedProperties(String cityName,
+                                                 String propertyType,
+                                                 Integer bedrooms){
+        if(cityName != null && propertyType != null && bedrooms != null){
+            return propertyRepository.findByCityIgnoreCaseAndPropertyTypeIgnoreCaseAndBedroomsAndIsPublicTrue(cityName, propertyType, bedrooms);
+        }
+        return null;
+    }
+
+    @Override
+    public List<Property> getSearchRequest(String city,
+                                           String serviceType,
+                                           String propertyType,
+                                           Integer bedrooms,
+                                           Double minimumPrice,
+                                           Double maximumPrice,
+                                           String status){
+        return propertyRepository.findPropertiesByFilters(city, serviceType, propertyType, bedrooms, minimumPrice, maximumPrice, status);
     }
 }

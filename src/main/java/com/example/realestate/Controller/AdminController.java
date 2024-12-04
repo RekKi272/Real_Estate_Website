@@ -1,8 +1,10 @@
 package com.example.realestate.Controller;
 
 import com.example.realestate.Model.Image;
+import com.example.realestate.Model.Package;
 import com.example.realestate.Model.Property;
 import com.example.realestate.Model.User;
+import com.example.realestate.Service.PackageService;
 import com.example.realestate.Service.PropertyService;
 import com.example.realestate.Service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +27,9 @@ public class AdminController {
 
     @Autowired
     private PropertyService propertyService;
+
+    @Autowired
+    private PackageService packageService;
 
     @ModelAttribute
     public void getUserInfo(Principal p, Model model) {
@@ -170,6 +175,44 @@ public class AdminController {
             session.setAttribute("errorMsg", "Error updating property: " + e.getMessage());
             return "redirect:/admin/view_property?pid=" + property.getId();
         }
+    }
+
+    @GetMapping(value = "/view_package")
+    public String view_package(Model model) {
+        List<Package> packageList = packageService.getAllPackages();
+        model.addAttribute("packageList", packageList);
+        return "/admin/view_package_service";
+    }
+
+    @GetMapping(value = "editPackage")
+    public String editPackage(@RequestParam("id") Long id, Model model) {
+        Package curPackage = packageService.getPackageById(id);
+        model.addAttribute("package", curPackage);
+        return "admin/edit_package";
+    }
+
+    @PostMapping(value = "editPackage")
+    public String editPackage(@ModelAttribute Package pack, HttpSession session) {
+        Package curPackage = packageService.getPackageById(pack.getId());
+        curPackage.setName(pack.getName());
+        curPackage.setPrice(pack.getPrice());
+        curPackage.setDescription(pack.getDescription());
+        curPackage.setDuration(pack.getDuration());
+        packageService.save(curPackage);
+        session.setAttribute("successMsg", "Package updated successfully!");
+        return "redirect:/admin/view_package";
+    }
+
+    @PostMapping(value = "/addPackage")
+    public String savePackage(@ModelAttribute Package pack, HttpSession session){
+        packageService.save(pack);
+        session.setAttribute("successMsg", "Package added successfully!");
+        return "redirect:/admin/view_package";
+    }
+
+    @GetMapping(value = "/addPackage")
+    public String addPackage() {
+        return "admin/add_package_service";
     }
 
 }

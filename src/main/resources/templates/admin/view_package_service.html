@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{admin/admin_base::layout(~{::section})}">
+<head>
+  <title>Edit User</title>
+</head>
+<body>
+  <section>
+    <div class="container-fluid mt-5 p-5">
+      <div class="card card-sh">
+        <div class="card-header text-center">
+          <th:block th:if="${session.successMsg}">
+            <p class="text-success fw-bold">[[${session.successMsg}]]</p>
+            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+          </th:block>
+
+          <th:block th:if="${session.errorMsg}">
+            <p class="text-danger fw-bold">[[${session.errorMsg}]]</p>
+            <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
+          </th:block>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+            <tr>
+              <th scope="col">Sl No</th>
+              <th scope="col">name</th>
+              <th scope="col">Package Description</th>
+              <th scope="col">Price</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="p,c:${packageList}">
+              <th scope="row">[[${c.count}]]</th>
+              <td>[[${p.name}]]</td>
+              <td>[[${p.description}]]</td>
+              <td>[[${p.price}]]</td>
+              <td>[[${p.duration}]]</td>
+              <td>
+                <a th:href="@{'/admin/editPackage?id='+${p.id}}"
+                   methods="get" class="btn btn-sm btn-primary">Edit</a>
+              </td>
+            </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

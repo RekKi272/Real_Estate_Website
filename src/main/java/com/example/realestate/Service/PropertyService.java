@@ -17,6 +17,8 @@ public interface PropertyService {
 
     void save(Property property);
 
+    void delete(Property property);
+
     List<Property> getListPropertyByUser(User user);
 
     List<Property> getAllProperty();
@@ -25,4 +27,10 @@ public interface PropertyService {
     List<Image> saveImages(Property property, MultipartFile[] images) throws IOException;
 
     List<Property> latestPublicProperty();
+
+    List<Property> getFilteredProperties(String category, String serviceType, String status);
+
+    List<Property> getSearchedProperties(String cityName, String serviceType, Integer bedrooms);
+
+    List<Property> getSearchRequest(String city, String serviceType, String propertyType, Integer bedrooms, Double minimumPrice, Double maximumPrice, String status);
 }
