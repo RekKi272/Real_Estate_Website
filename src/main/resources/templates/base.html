@@ -56,24 +56,37 @@
 
                 <div class="menu">
                     <ul>
-                        <li><a href="#">buy<i class="fas fa-angle-down"></i></a>
+                        <li><a href="#">Buy<i class="fas fa-angle-down"></i></a>
                             <ul>
-                                <li><a href="#">house</a></li>
-                                <li><a href="#">flat</a></li>
-                                <li><a href="#">shop</a></li>
-                                <li><a href="#">ready to move</a></li>
+                                <li><a href="/list_search?category=house&serviceType=sale">house</a></li>
+                                <li><a href="/list_search?category=flat&serviceType=sale">flat</a></li>
+                                <li><a href="/list_search?category=shop&serviceType=sale">shop</a></li>
+                                <li><a href="/list_search?category=building&serviceType=sale">building</a></li>
                             </ul>
                         </li>
-                        <li><a href="#">sell<i class="fas fa-angle-down"></i></a>
+                        <li><a href="#">Sell<i class="fas fa-angle-down"></i></a>
                             <ul>
-                                <li><a href="#">post property</a></li>
+                                <th:block th:if="${user == null or user.email == ''}">
+                                    <li><a href="#" onclick="showPackageWarning()">post property</a></li>
+                                </th:block>
+                                <th:block th:if="${user != null and user.email !=''}">
+                                    <li><a href="/user/post_property">post property</a></li>
+                                </th:block>
                             </ul>
                         </li>
-                        <li><a href="#">rent</a>
+                        <li><a href="#">Rent<i class="fas fa-angle-down"></i></a>
                             <ul>
-                                <li><a href="#">house</a></li>
-                                <li><a href="#">flat</a></li>
-                                <li><a href="#">shop</a></li>
+                                <li><a href="/list_search?category=house&serviceType=rent">house</a></li>
+                                <li><a href="/list_search?category=flat&serviceType=rent">flat</a></li>
+                                <li><a href="/list_search?category=shop&serviceType=rent">shop</a></li>
+                                <li><a href="/list_search?category=building&serviceType=rent">building</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Status<i class="fas fa-angle-down"></i></a>
+                            <ul>
+                                <li><a href="/list_search?status=ready to move">Ready to move</a></li>
+                                <li><a href="/list_search?status=under construction">Under construction</a></li>
+                                <li><a href="/list_search?status=repairing">Under Repairing</a></li>
                             </ul>
                         </li>
                         <li><a href="#">help<i class="fas fa-angle-down"></i></a>
@@ -83,6 +96,7 @@
                             </ul>
                         </li>
                         <li><a href="/service_detail">Sign up for service package <i class="fas fa-angle"></i></a>
+                        <li><a href="/search">Search <i class="fas fa-angle"></i></a>
                     </ul>
                 </div>
 

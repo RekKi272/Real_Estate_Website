@@ -47,9 +47,32 @@ public class HomeController {
         return "index";
     }
 
+    @PostMapping(value = "/search")
+    public String search(Model model,
+                         @RequestParam(value = "city", required = false) String city,
+                         @RequestParam(value = "propertyType", required = false) String propertyType,
+                         @RequestParam(value = "bedrooms", required = false) String bedrooms) {
+        List<Property> searchedList = propertyService.getSearchedProperties(city, propertyType, Integer.valueOf(bedrooms));
+        model.addAttribute("publicPost", searchedList);
+        return "listings";
+    }
+
     @GetMapping(value = "/search")
-    public String search() {
+    public String searchPage(){
         return "search";
+    }
+
+    @PostMapping(value = "/filtered")
+    public String filteredSearch(Model model,
+                                 @RequestParam(value = "city", required = false) String city,
+                                 @RequestParam(value = "serviceType", required = false) String serviceType,
+                                 @RequestParam(value = "propertyType", required = false) String propertyType,
+                                 @RequestParam(value = "bedrooms", required = false) String bedrooms,
+                                 @RequestParam(value = "minimum", required = false) String minimumPrice,
+                                 @RequestParam(value = "maximum", required = false) String maximumPrice,
+                                 @RequestParam(value = "status", required = false) String status){
+
+        return "listings";
     }
 
     @GetMapping(value = "/about")
@@ -66,6 +89,14 @@ public class HomeController {
     public String listing(Model model) {
         List<Property> publicPost = propertyService.latestPublicProperty();
         model.addAttribute("publicPost", publicPost);
+        return "listings";
+    }
+
+    @GetMapping(value = "/list_search")
+    public String list_search(Model model, @RequestParam(value = "category", required = false) String category, @RequestParam(value = "serviceType", required = false) String serviceType, @RequestParam(value = "status", required = false) String status) {
+        // Retrieve the filtered properties based on category, serviceType or status
+        List<Property> filteredProperties = propertyService.getFilteredProperties(category, serviceType, status);
+        model.addAttribute("publicPost", filteredProperties);
         return "listings";
     }
 

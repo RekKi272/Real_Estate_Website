@@ -8,4 +8,5 @@ import java.util.List;
 public interface PackageService {
     List<Package> getAllPackages();
     Package getPackageById(Long id);
+    void save(Package pack);
 }

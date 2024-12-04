@@ -24,4 +24,8 @@ public class PackageServiceImpl implements PackageService {
         return packageRepository.findById(id).get();
     }
 
+    @Override
+    public void save(Package pack){
+        packageRepository.save(pack);
+    }
 }
