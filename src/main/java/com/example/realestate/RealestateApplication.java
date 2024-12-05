@@ -26,6 +26,7 @@ public class RealestateApplication implements CommandLineRunner {
 	public void createAdmin(){
 		User admin = new User();
 		admin.setEmail("admin1@gmail.com");
+		admin.setName("admin1");
 		admin.setPassword(passwordEncoder.encode("admin"));
 		admin.setIsEnable(true);
 		admin.setCheckStatus(true);
