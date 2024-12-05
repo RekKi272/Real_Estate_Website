@@ -103,12 +103,12 @@ public class AdminController {
     }
 
     @PostMapping(value = "/saveAdmin")
-    public String saveAdmin(@ModelAttribute User user, @RequestParam("confirmPassword") String confirmPassword,HttpSession session) {
-
-        if(user == null) {
-            session.setAttribute("errorMsg", "Please enter a user name");
-            return "redirect:/admin/add_admin";
-        }
+    public String saveAdmin(@RequestParam("name") String name, @RequestParam("email") String email, @RequestParam("phone") String phone, @RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword,HttpSession session) {
+        User user = new User();
+        user.setName(name);
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setPassword(password);
 
         if(userService.isEmailExist(user.getEmail())) {
             session.setAttribute("errorMsg", "Email Already Exist");
