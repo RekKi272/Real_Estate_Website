@@ -157,7 +157,7 @@ public class UserController {
         }
     }
 
-    @GetMapping(value = "/delete")
+    @PostMapping(value = "/delete")
     public String deleteProperties(@RequestParam(value = "id") Long id,Principal p){
         if(p != null) {
             Property property = propertyService.getPropertyById(id);
