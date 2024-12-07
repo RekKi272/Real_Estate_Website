@@ -71,7 +71,6 @@ public class HomeController {
                                  @RequestParam(value = "minimum", required = false) String minimumPrice,
                                  @RequestParam(value = "maximum", required = false) String maximumPrice,
                                  @RequestParam(value = "status", required = false) String status){
-
         return "listings";
     }
 

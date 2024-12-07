@@ -19,6 +19,7 @@
         <p class="text-warning fw-bold">[[${session.errorMsg}]]</p>
         <th:block th:text="${@commonServiceImpl.removeSessionMessage()}"></th:block>
       </th:block >
+
       <!-- Property Title -->
       <div class="flex">
         <div class="box">
@@ -116,8 +117,7 @@
           <select name="status" class="input" required th:value="${property.status}">
             <option th:selected="${property.status == 'Ready To Move'}" value="Ready To Move">Ready To Move</option>
             <option th:selected="${property.status == 'Under Construction'}" value="Under Construction">Under Construction</option>
-            <option th:selected="${property.status == 'Sold'}" value="Sold">Sold</option>
-            <option th:selected="${property.status == 'Under Repairing'}" value="Under Repairing">Under Repairing</option>
+            <option th:selected="${property.status == 'Repairing'}" value="Repairing">Under Repairing</option>
           </select>
         </div>
       </div>
