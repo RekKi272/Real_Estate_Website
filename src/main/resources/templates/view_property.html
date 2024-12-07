@@ -59,6 +59,28 @@
             </div>
             <h3 class="title">description</h3>
             <p class="description">[[${post.description}]]</p>
+            <h3 class="title">Price History</h3>
+            <div class="price-history">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Price</th>
+                        <th>Event</th>
+                        <th>Source</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="priceHistory : ${updateLog}">
+                        <td th:text="${priceHistory.formattedDate}"></td>
+                        <td th:text="${priceHistory.oldPrice}"></td>
+                        <td th:text="${priceHistory.event}"></td>
+                        <td th:text="${priceHistory.user.role + ' ' + priceHistory.user.name}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
     </section>
 

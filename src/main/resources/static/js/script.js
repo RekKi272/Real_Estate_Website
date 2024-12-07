@@ -1,3 +1,4 @@
+
 let menu = document.querySelector('.header .menu');
 
 document.querySelector('#menu-btn').onclick = () =>{
@@ -46,3 +47,23 @@ document.querySelectorAll('.faq .box-container .box h3').forEach(headings =>{
       headings.parentElement.classList.toggle('active');
    }
 });
+function toggleFeedbackRequest() {
+   const checkbox = document.getElementById('is-public-checkbox');
+   const feedbackLabel = document.getElementById('feedback-label');
+   const feedbackInput = document.getElementById('feedback-request');
+
+   if (checkbox.checked) {
+      // Hide feedback elements when "Is Public" is checked
+      feedbackLabel.style.display = 'none';
+      feedbackInput.style.display = 'none';
+   } else {
+      // Show feedback elements when "Is Public" is unchecked
+      feedbackLabel.style.display = 'inline';
+      feedbackInput.style.display = 'inline';
+   }
+}
+
+// Set initial state on page load based on the checkbox's initial value
+window.onload = function () {
+   toggleFeedbackRequest();
+};

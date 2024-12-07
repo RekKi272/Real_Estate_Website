@@ -88,6 +88,12 @@ public class Property {
 
     private LocalDateTime updatedAt;
 
+    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UpdateLog> updateLogs;
+
+    private String isAvailable;
+
+    private String feedbackRequest;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)

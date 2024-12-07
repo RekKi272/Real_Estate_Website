@@ -2,9 +2,11 @@ package com.example.realestate.Controller;
 
 import com.example.realestate.Model.Image;
 import com.example.realestate.Model.Property;
+import com.example.realestate.Model.UpdateLog;
 import com.example.realestate.Model.User;
 import com.example.realestate.Service.CommonService;
 import com.example.realestate.Service.PropertyService;
+import com.example.realestate.Service.UpdateLogService;
 import com.example.realestate.Service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.experimental.PackagePrivate;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -30,6 +35,9 @@ public class UserController {
 
     @Autowired
     private CommonService commonService;
+
+    @Autowired
+    private UpdateLogService updateLogService;
 
     @ModelAttribute
     public void getUserInfo(Principal p, Model model) {
@@ -66,6 +74,7 @@ public class UserController {
     public String view_my_property(Model model, @RequestParam("pid") Long pid) {
         Property property = propertyService.getPropertyById(pid);
         model.addAttribute("post", property);
+        model.addAttribute("updateLog", property.getUpdateLogs());
         return "user/my_property_detail";
     }
 
@@ -80,13 +89,24 @@ public class UserController {
         property.setHasShoppingMall(property.getHasShoppingMall() != null ? property.getHasShoppingMall() : false);
         property.setHasHospital(property.getHasHospital() != null ? property.getHasHospital() : false);
         property.setHasSchool(property.getHasSchool() != null ? property.getHasSchool() : false);
+        property.setIsAvailable("Available");
+        property.setFeedbackRequest("");
         property.setIsPublic(Boolean.FALSE);
         if(p != null) {
             String username = p.getName();
             User curUser = userService.getUserByEmail(username);
             property.setPostedBy(curUser);
+            property.setUpdateLogs(new ArrayList<>());
             try{
                 propertyService.saveProperty(property, files);
+                // Save the update log
+                UpdateLog updateLog = new UpdateLog();
+                updateLog.setProperty(property);
+                updateLog.setUser(curUser);
+                updateLog.setField(UpdateLog.updateField.SERVICE_TYPE);
+                updateLog.setOldPrice(property.getPrice());
+                updateLog.setEvent("Listed for "+ property.getServiceType());
+                updateLogService.saveUpdateLog(updateLog);
                 String path = "src/main/resources/static/images/";
                 for (MultipartFile file : files) {
                     commonService.saveImage(path, file);
@@ -113,6 +133,48 @@ public class UserController {
         try {
             // Fetch the existing property from the database.
             Property curProperty = propertyService.getPropertyById(property.getId());
+            // Check if only the price is updated.
+            boolean isPriceUpdated = true;
+            // Add an update log if the price is updated.
+
+            if(!Objects.equals(property.getServiceType(), curProperty.getServiceType())) {
+                UpdateLog updateLog = new UpdateLog();
+                updateLog.setProperty(curProperty);
+                updateLog.setUser(curProperty.getPostedBy());
+                updateLog.setOldPrice(property.getPrice());
+                updateLog.setFormattedDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                updateLog.setField(UpdateLog.updateField.SERVICE_TYPE);
+                updateLog.setEvent("Listed for "+ property.getServiceType());
+                List<UpdateLog> updateLogs = curProperty.getUpdateLogs();
+                updateLogs.add(updateLog);
+                curProperty.setUpdateLogs(updateLogs);
+                isPriceUpdated = false;
+            }
+            if(!property.getIsAvailable().equalsIgnoreCase(curProperty.getIsAvailable()) && !property.getIsAvailable().equalsIgnoreCase("Available")) {
+                UpdateLog updateLog = new UpdateLog();
+                updateLog.setProperty(curProperty);
+                updateLog.setUser(curProperty.getPostedBy());
+                updateLog.setOldPrice(property.getPrice());
+                updateLog.setFormattedDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                updateLog.setField(UpdateLog.updateField.STATUS);
+                updateLog.setEvent(property.getIsAvailable());
+                List<UpdateLog> updateLogs = curProperty.getUpdateLogs();
+                updateLogs.add(updateLog);
+                curProperty.setUpdateLogs(updateLogs);
+                isPriceUpdated = false;
+            }
+            if(!Objects.equals(property.getPrice(), curProperty.getPrice()) && isPriceUpdated) {
+                UpdateLog updateLog = new UpdateLog();
+                updateLog.setProperty(curProperty);
+                updateLog.setUser(curProperty.getPostedBy());
+                updateLog.setOldPrice(property.getPrice());
+                updateLog.setFormattedDate(LocalDateTime.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+                updateLog.setField(UpdateLog.updateField.PRICE);
+                updateLog.setEvent("Price change");
+                List<UpdateLog> updateLogs = curProperty.getUpdateLogs();
+                updateLogs.add(updateLog);
+                curProperty.setUpdateLogs(updateLogs);
+            }
 
             // Update property fields only if provided.
             curProperty.setTitle(property.getTitle() != null ? property.getTitle() : curProperty.getTitle());
@@ -129,6 +191,7 @@ public class UserController {
             curProperty.setBalcony(property.getBalcony() != null ? property.getBalcony() : curProperty.getBalcony());
             curProperty.setSize(property.getSize() != null ? property.getSize() : curProperty.getSize());
             curProperty.setStatus(property.getStatus() != null ? property.getStatus() : curProperty.getStatus());
+            curProperty.setIsAvailable(property.getIsAvailable() != null ? property.getIsAvailable() : curProperty.getIsAvailable());
 
             // Update amenities with defaults to false.
             curProperty.setHasLift(property.getHasLift() != null ? property.getHasLift() : false);
