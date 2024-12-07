@@ -1119,3 +1119,118 @@ section{
 .form-container form .btn:hover {
    background-color: var(--black);
 }
+
+/* Style the overall table */
+.price-history table {
+   width: 100%; /* Make the table span the full width of its container */
+   border-collapse: separate; /* Ensures border radius works */
+   border-spacing: 0; /* Removes gaps between cells */
+   font-size: 18px; /* Increases text size */
+   border: 1px solid #ddd; /* Adds a border around the table */
+   border-radius: 8px; /* Adds rounded corners */
+   overflow: hidden; /* Ensures rounded corners are visible */
+}
+
+/* Style the header row */
+.price-history thead tr {
+   background-color: #f4f4f4; /* Light gray background for the header row */
+   color: #333; /* Dark text for contrast */
+   font-weight: bold; /* Makes header text bold */
+   text-align: left; /* Align text to the left */
+}
+
+/* Add padding and borders to header cells */
+.price-history thead th {
+   padding: 12px 15px; /* Add padding inside the header cells */
+   border-bottom: 2px solid #ddd; /* Adds a bottom border to header cells */
+}
+
+/* Style the table rows */
+.price-history tbody tr {
+   background-color: #fff; /* White background for table rows */
+   color: #333; /* Dark text for body rows */
+}
+
+/* Add padding and borders to body cells */
+.price-history tbody td {
+   padding: 10px 15px; /* Add padding inside the body cells */
+   border-bottom: 1px solid #ddd; /* Adds a border between rows */
+}
+
+/* Add hover effect to rows */
+.price-history tbody tr:hover {
+   background-color: #f9f9f9; /* Light gray background on hover */
+}
+
+/* Adjust table font size */
+.price-history {
+   font-size: 20px; /* Larger font size for the entire table */
+}
+
+/* Optional: Center align the table within the container */
+.price-history {
+   margin: 20px auto; /* Adds space around the table and centers it */
+}
+/* Styling the feedback label */
+#feedback-label {
+   font-size: 14px;
+   font-weight: normal;
+   color: #333;
+   margin-top: 8px;
+}
+
+/* Styling the feedback input */
+#feedback-request {
+   display: block;
+   width: 100%;
+   max-width: 300px;
+   margin-top: 8px;
+   padding: 8px;
+   border: 1px solid #ccc;
+   border-radius: 5px;
+   font-size: 14px;
+   background-color: #fff;
+   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Adding hover and focus effects */
+#feedback-request:focus {
+   border-color: #007bff;
+   outline: none;
+   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+#feedback-request:hover {
+   border-color: #555;
+}
+
+/* General style for feedback property messages */
+.feedback-property {
+   padding: 15px;
+   margin-top: 10px;
+   border-radius: 5px;
+   font-size: 16px;
+   font-weight: bold;
+   text-align: center;
+   transition: background-color 0.3s ease;
+}
+
+/* Style for the "Post is Public" message */
+#feedback-public {
+   color: #28a745;  /* Green */
+}
+
+/* Style for the "Post is Private" message */
+#feedback-private {
+   color: #ffc107;  /* Yellow */
+}
+
+/* Style for the "Post is Declined" message */
+#feedback-declined {
+   color: #dc3545;  /* Red */
+}
+
+/* Optional: Add a hover effect to make the message stand out */
+.feedback-property:hover {
+   opacity: 0.9;
+}

@@ -130,6 +130,7 @@ public class HomeController {
     public String viewProperty(Model model, @RequestParam Long pid) {
         Property property = propertyService.getPropertyById(pid);
         model.addAttribute("post", property);
+        model.addAttribute("updateLog", property.getUpdateLogs());
         return "view_property";
     }
 

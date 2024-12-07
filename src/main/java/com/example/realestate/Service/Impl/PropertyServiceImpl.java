@@ -2,9 +2,11 @@ package com.example.realestate.Service.Impl;
 
 import com.example.realestate.Model.Image;
 import com.example.realestate.Model.Property;
+import com.example.realestate.Model.UpdateLog;
 import com.example.realestate.Model.User;
 import com.example.realestate.Repository.ImageRepository;
 import com.example.realestate.Repository.PropertyRepository;
+import com.example.realestate.Repository.UpdateLogRepository;
 import com.example.realestate.Service.PropertyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,9 @@ public class PropertyServiceImpl implements PropertyService {
     @Autowired
     private ImageRepository imageRepository;
 
+    @Autowired
+    private UpdateLogRepository updateLogRepository;
+
     @Override
     public List<Property> listPropertyByIsPublic(Boolean isPublic){
         return propertyRepository.findPropertiesByIsPublic(isPublic);
@@ -32,6 +37,7 @@ public class PropertyServiceImpl implements PropertyService {
     public void saveProperty(Property property, MultipartFile[] images) throws IOException {
 
         propertyRepository.save(property);
+        updateLogRepository.saveAll(property.getUpdateLogs());
 
         List<Image> imageList = new ArrayList<Image>();
 
