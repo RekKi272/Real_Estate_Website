@@ -113,5 +113,7 @@ public class Property {
     protected void onUpdate() {
         this.updatedAt = LocalDateTime.now();
     }
-
+    public String toString() {
+        return "";
+    }
 }

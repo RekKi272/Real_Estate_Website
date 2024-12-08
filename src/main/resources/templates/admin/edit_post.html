@@ -57,9 +57,10 @@
         <div class="box">
           <p>property type <span>*</span></p>
           <select name="propertyType" class="input" required th:value="${property.propertyType}">
-            <option th:selected="${property.status == 'flat'}" value="flat">flat</option>
-            <option th:selected="${property.status == 'house'}" value="house">house</option>
-            <option th:selected="${property.status == 'shop'}" value="shop">shop</option>
+            <option th:selected="${property.propertyType == 'flat'}" value="flat">flat</option>
+            <option th:selected="${property.propertyType == 'house'}" value="house">house</option>
+            <option th:selected="${property.propertyType == 'shop'}" value="shop">shop</option>
+            <option th:selected="${property.propertyType == 'building'}" value="building">building</option>
           </select>
         </div>
         <div class="box">
@@ -136,6 +137,7 @@
           <select name="isAvailable" class="input">
             <option th:selected="${property.isAvailable == 'Available'}" value="Available">Available</option>
             <option th:selected="${property.isAvailable == 'Sold'}" value="Sold">Sold</option>
+            <option th:selected="${property.isAvailable == 'Rented'}" value="Rented">Rented</option>
           </select>
         </div>
       </div>
@@ -196,8 +198,6 @@
           <input type="file" name="files" accept="image/*" multiple class="input">
         </div>
       </div>
-
-
       <button type="submit" class="btn">Save your edit</button>
     </form>
   </section>

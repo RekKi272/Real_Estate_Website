@@ -71,7 +71,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="priceHistory : ${updateLog}">
+                    <tr th:unless="${priceHistory.event.equals('Rented')}" th:each="priceHistory : ${updateLog}">
                         <td th:text="${priceHistory.formattedDate}"></td>
                         <td th:text="${priceHistory.oldPrice}"></td>
                         <td th:text="${priceHistory.event}"></td>

@@ -25,7 +25,7 @@ public interface PropertyRepository extends JpaRepository<Property, Long> {
     List<Property> findByCityIgnoreCaseAndPropertyTypeIgnoreCaseAndBedroomsAndIsPublicTrue(String city, String propertyType, Integer bedrooms);
 
     @Query("SELECT p FROM Property p WHERE " +
-            "(:city IS NULL OR LOWER(p.city) = LOWER(:city)) AND " +
+            "(:city IS NULL OR LOWER(p.city) LIKE LOWER(CONCAT('%', :city, '%'))) AND " +
             "(:serviceType IS NULL OR LOWER(p.serviceType) = LOWER(:serviceType)) AND " +
             "(:propertyType IS NULL OR LOWER(p.propertyType) = LOWER(:propertyType)) AND " +
             "(:bedrooms IS NULL OR p.bedrooms = :bedrooms) AND " +

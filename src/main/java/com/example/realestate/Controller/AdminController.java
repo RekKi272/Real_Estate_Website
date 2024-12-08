@@ -2,18 +2,22 @@ package com.example.realestate.Controller;
 
 import com.example.realestate.Model.*;
 import com.example.realestate.Model.Package;
-import com.example.realestate.Service.PackageService;
-import com.example.realestate.Service.PropertyService;
-import com.example.realestate.Service.UserService;
+import com.example.realestate.Repository.UserPackageRepository;
+import com.example.realestate.Service.*;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.security.Principal;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +34,34 @@ public class AdminController {
 
     @Autowired
     private PackageService packageService;
+
+    @Autowired
+    private UpdateLogService updateLogService;
+
+    @Autowired
+    private ExcelExportService excelExportService;
+
+    @Autowired
+    private UserPackageService userPackageService;
+
+    @GetMapping("/export_excel_commission")
+    public void exportToExcelCommission(HttpServletResponse response,
+                              @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                              @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws IOException {
+        // Fetch the data
+        List<UpdateLog> updateLogs = updateLogService.getUpdateLogInPeriod(startDate, endDate);
+        // Export to Excel
+        excelExportService.exportDataToExcel(response, updateLogs);
+    }
+    @GetMapping("/export_excel_user_package")
+    public void exportToExcelUserPackage(HttpServletResponse response,
+                              @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+                              @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) throws IOException {
+        // Fetch the data
+        List<User_Package> userPackages = userPackageService.getUserPackagesBetween(startDate.atStartOfDay(), endDate.atTime(LocalTime.MAX));
+        // Export to Excel
+        excelExportService.exportUserPackageDataToExcel(response, userPackages);
+    }
 
     @ModelAttribute
     public void getUserInfo(Principal p, Model model) {
@@ -252,6 +284,11 @@ public class AdminController {
         packageService.save(pack);
         session.setAttribute("successMsg", "Package added successfully!");
         return "redirect:/admin/view_package";
+    }
+
+    @GetMapping(value = "/successfulProperty")
+    public String successfulPackage(Model model) {
+        return "admin/successful_property_transaction_management";
     }
 
     @GetMapping(value = "/addPackage")

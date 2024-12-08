@@ -71,6 +71,8 @@ public class HomeController {
                                  @RequestParam(value = "minimum", required = false) String minimumPrice,
                                  @RequestParam(value = "maximum", required = false) String maximumPrice,
                                  @RequestParam(value = "status", required = false) String status){
+        List<Property> filteredList = propertyService.getSearchRequest(city, serviceType, propertyType, Integer.valueOf(bedrooms), Double.valueOf(minimumPrice), Double.valueOf(maximumPrice), status);
+        model.addAttribute("publicPost", filteredList);
         return "listings";
     }
 
