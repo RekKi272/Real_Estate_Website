@@ -43,7 +43,7 @@ public class RealestateApplication implements CommandLineRunner {
 		User admin = new User();
 		admin.setEmail("admin1@gmail.com");
 		admin.setName("Minh Duc");
-		admin.setPassword("admin");
+		admin.setPassword(passwordEncoder.encode("admin"));
 		admin.setIsEnable(true);
 		admin.setCheckStatus(true);
 		admin.setPhone("1234567890");
@@ -55,7 +55,7 @@ public class RealestateApplication implements CommandLineRunner {
 		User user1 = new User();
 		user1.setEmail("user1@gmail.com");
 		user1.setName("Hoang Tuan");
-		user1.setPassword("1234");
+		user1.setPassword(passwordEncoder.encode("1234"));
 		user1.setIsEnable(true);
 		user1.setCheckStatus(true);
 		user1.setPhone("0987654321");
@@ -67,7 +67,7 @@ public class RealestateApplication implements CommandLineRunner {
 		User user2 = new User();
 		user2.setEmail("user2@gmail.com");
 		user2.setName("Xuan Canh");
-		user2.setPassword("1234");
+		user2.setPassword(passwordEncoder.encode("1234"));
 		user2.setIsEnable(false);
 		user2.setCheckStatus(false);
 		user2.setPhone("1122334455");
