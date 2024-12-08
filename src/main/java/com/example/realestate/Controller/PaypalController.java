@@ -112,6 +112,7 @@ public class PaypalController {
 
                 curUser.setCheckStatus(true);
                 userService.updateUser(curUser);
+
                 return "payment_success";
             }
         } catch (PayPalRESTException e){

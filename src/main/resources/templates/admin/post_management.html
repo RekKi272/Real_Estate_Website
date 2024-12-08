@@ -28,7 +28,9 @@
             <div class="thumb">
               <p class="total-images"><i class="far fa-image"></i><span>[[${post.images.size}]]</span></p>
               <p class="type"><span>[[${post.propertyType}]]</span><span>[[${post.serviceType}]]</span></p>
-              <img th:src="@{'/images/'+${post.images[0].url}}" alt="">
+                <img th:if="${post.images != null and post.images.size() > 0}"
+                     th:src="@{'/images/' + ${post.images[0].url}}"
+                     alt="Post Image">
             </div>
             <h3 class="name">[[${post.title}]]</h3>
             <p class="location"><i class="fas fa-map-marker-alt"></i><span>[[${post.address}]]</span></p>
