@@ -103,4 +103,4 @@ Password: admin
 ![image](https://github.com/user-attachments/assets/1bdfc1bf-8d1d-44e7-8538-2aeab05688e5)
 
 ## Video demo
-
+Link: https://youtu.be/5DOYtY65IpU?si=Ae0PoLR6dJVxuvt3
