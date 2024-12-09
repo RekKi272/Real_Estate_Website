@@ -71,6 +71,36 @@ Password: admin
 5. **Access the Application**:
   * Navigate to  *http://localhost:8080*
 ## Screen shot
+### User
+#### Home Page
+![image](https://github.com/user-attachments/assets/3b40f84a-05b6-4341-aa6e-edb5140475b2)
+#### Listing Properties
+![image](https://github.com/user-attachments/assets/ce0fdca4-1e60-484d-96c4-0fde39b61fa9)
+#### Property detail view
+![image](https://github.com/user-attachments/assets/bf217e6d-8b01-4b7a-8861-e87c44f660ff)
+#### Login page
+![image](https://github.com/user-attachments/assets/16cbd3fd-f1a1-4bdc-bd37-95b168a9138d)
+#### Register page
+![image](https://github.com/user-attachments/assets/70eca55a-7274-4915-8eef-f1a9d9c95d87)
+### Search/Filter page
+![image](https://github.com/user-attachments/assets/81d84ad3-a687-4d2b-bdb2-4c9ed4e6c528)
+#### Pay package Service
+![image](https://github.com/user-attachments/assets/e5db8d6e-6987-4e23-8082-17cdd0bc4b14)
+### Admin
+#### Manage Post page
+![image](https://github.com/user-attachments/assets/f3be7531-4d3f-4c88-826e-de3b7aeddd07)
+#### Manage User page
+![image](https://github.com/user-attachments/assets/3526b221-a153-4860-9a15-bbd1bbe7deb2)
+#### Manage Admin page
+![image](https://github.com/user-attachments/assets/4989ab4e-d185-46bc-bd65-64276f189de3)
+#### Add admin page
+![image](https://github.com/user-attachments/assets/9fc7c99e-d57c-4bc1-8f98-366f4181bac4)
+#### View Package page
+![image](https://github.com/user-attachments/assets/87181d28-79f4-45d1-941a-2514d3d6aa60)
+#### Add/Edit Package page
+![image](https://github.com/user-attachments/assets/74fdb27f-12f1-47b8-aacb-494280bec397)
+#### Commission Management
+![image](https://github.com/user-attachments/assets/1bdfc1bf-8d1d-44e7-8538-2aeab05688e5)
 
 ## Video demo
 
