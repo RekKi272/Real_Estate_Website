@@ -118,6 +118,8 @@ Password: admin
 
 <img width="1001" alt="Screenshot 2024-12-09 at 9 02 02 PM" src="https://github.com/user-attachments/assets/807f1b30-13a7-492b-8d46-51d3f0e62660">
 
+## User
+
 #### Get My Properties
 <img width="1006" alt="Screenshot 2024-12-09 at 9 24 10 PM" src="https://github.com/user-attachments/assets/ecb058d4-451f-4b5d-879e-91e336407a9b">
 
@@ -145,6 +147,8 @@ Successfully Post Property (Success Message)
 
 Show New Property In My Properties Page
 <img width="998" alt="Screenshot 2024-12-09 at 9 59 59 PM" src="https://github.com/user-attachments/assets/99c5caea-8e02-4508-9c76-a52462041677">
+
+## Admin
 
 #### Get All Packages
 <img width="995" alt="Screenshot 2024-12-09 at 10 04 34 PM" src="https://github.com/user-attachments/assets/e96b5e86-5b02-482a-a961-69c192427d9e">
