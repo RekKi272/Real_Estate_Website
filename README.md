@@ -102,5 +102,47 @@ Password: admin
 #### Commission Management
 ![image](https://github.com/user-attachments/assets/1bdfc1bf-8d1d-44e7-8538-2aeab05688e5)
 
+## Screenshot Postman
+### Guest
+#### Get All Properties
+<img width="1006" alt="Screenshot 2024-12-09 at 8 53 46 PM" src="https://github.com/user-attachments/assets/7c031b6b-3dca-4331-af34-9c1941c1a3e2">
+
+#### Get Property By Filter
+<img width="1001" alt="Screenshot 2024-12-09 at 7 35 50 PM" src="https://github.com/user-attachments/assets/5667b2bf-aaff-442e-acfe-9b0949341401">
+
+#### Get Properties By Category, Service Type
+<img width="987" alt="Screenshot 2024-12-09 at 8 57 54 PM" src="https://github.com/user-attachments/assets/e5494a3b-8b23-4008-8309-37af5f1235e3">
+
+#### Get Details Of A Property
+<img width="1000" alt="Screenshot 2024-12-09 at 9 01 08 PM" src="https://github.com/user-attachments/assets/67e53106-b0e0-436b-848c-72e09d563024">
+
+<img width="1001" alt="Screenshot 2024-12-09 at 9 02 02 PM" src="https://github.com/user-attachments/assets/807f1b30-13a7-492b-8d46-51d3f0e62660">
+
+#### Get My Properties
+<img width="1006" alt="Screenshot 2024-12-09 at 9 24 10 PM" src="https://github.com/user-attachments/assets/ecb058d4-451f-4b5d-879e-91e336407a9b">
+
+<img width="997" alt="Screenshot 2024-12-09 at 9 24 49 PM" src="https://github.com/user-attachments/assets/90c3df9e-053d-4dcc-bcf5-e737a2fd9d19">
+
+<img width="1002" alt="Screenshot 2024-12-09 at 9 25 23 PM" src="https://github.com/user-attachments/assets/235f7de8-e946-48fa-9585-a5c6e5a4c63b">
+
+#### Get Details of My Property
+<img width="1005" alt="Screenshot 2024-12-09 at 9 27 36 PM" src="https://github.com/user-attachments/assets/06674729-0164-4a75-b99c-3fff2ffa42e0">
+
+<img width="993" alt="Screenshot 2024-12-09 at 9 28 05 PM" src="https://github.com/user-attachments/assets/4aea99d7-be5e-4ee8-a3cf-ccf0160cabbf">
+
+#### Update My Property
+Go into page to update property
+<img width="996" alt="Screenshot 2024-12-09 at 9 31 03 PM" src="https://github.com/user-attachments/assets/2904090f-70e3-4735-ad13-75319be36c66">
+
+<img width="1004" alt="Screenshot 2024-12-09 at 9 31 29 PM" src="https://github.com/user-attachments/assets/5d79be4e-50a4-4fd7-be6c-8864f182d4a5">
+
+Update property successfully
+<img width="1030" alt="Screenshot 2024-12-09 at 9 40 13 PM" src="https://github.com/user-attachments/assets/a0110470-1435-46aa-8a3f-286d7d2eb528">
+
+####  Insert property
+Successfully Post Property (Success Message)
+<img width="988" alt="Screenshot 2024-12-09 at 9 49 54 PM" src="https://github.com/user-attachments/assets/485e34ba-f72e-42aa-969f-c2ef38f09a1c">
+
+#### 
 ## Video demo
 Link: https://youtu.be/5DOYtY65IpU?si=Ae0PoLR6dJVxuvt3
