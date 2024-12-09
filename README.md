@@ -131,7 +131,7 @@ Password: admin
 <img width="993" alt="Screenshot 2024-12-09 at 9 28 05 PM" src="https://github.com/user-attachments/assets/4aea99d7-be5e-4ee8-a3cf-ccf0160cabbf">
 
 #### Update My Property
-Go into page to update property
+Go into page updating property
 <img width="996" alt="Screenshot 2024-12-09 at 9 31 03 PM" src="https://github.com/user-attachments/assets/2904090f-70e3-4735-ad13-75319be36c66">
 
 <img width="1004" alt="Screenshot 2024-12-09 at 9 31 29 PM" src="https://github.com/user-attachments/assets/5d79be4e-50a4-4fd7-be6c-8864f182d4a5">
@@ -143,6 +143,27 @@ Update property successfully
 Successfully Post Property (Success Message)
 <img width="988" alt="Screenshot 2024-12-09 at 9 49 54 PM" src="https://github.com/user-attachments/assets/485e34ba-f72e-42aa-969f-c2ef38f09a1c">
 
-#### 
+Show New Property In My Properties Page
+<img width="998" alt="Screenshot 2024-12-09 at 9 59 59 PM" src="https://github.com/user-attachments/assets/99c5caea-8e02-4508-9c76-a52462041677">
+
+#### Get All Packages
+<img width="995" alt="Screenshot 2024-12-09 at 10 04 34 PM" src="https://github.com/user-attachments/assets/e96b5e86-5b02-482a-a961-69c192427d9e">
+
+#### Update Package
+Go into page updating package
+<img width="1005" alt="Screenshot 2024-12-09 at 10 06 25 PM" src="https://github.com/user-attachments/assets/f6fb5ffd-084b-4d82-b680-a915c2808838">
+
+Successfully Update package
+<img width="997" alt="Screenshot 2024-12-09 at 10 09 59 PM" src="https://github.com/user-attachments/assets/fe85e9a3-041f-488d-9ff2-fe77a688e787">
+
+<img width="1001" alt="Screenshot 2024-12-09 at 10 10 53 PM" src="https://github.com/user-attachments/assets/a03ece36-9245-4ae5-ae98-b6144eb785d6">
+
+#### Insert Package
+Successfully Add Package (message)
+<img width="1004" alt="Screenshot 2024-12-09 at 10 14 28 PM" src="https://github.com/user-attachments/assets/c1529610-1187-4ec6-aad8-80c35e6c9683">
+
+Show New Package In Package List
+<img width="994" alt="Screenshot 2024-12-09 at 10 14 57 PM" src="https://github.com/user-attachments/assets/e42e19f0-9a24-4753-8e26-50da6d32aaba">
+
 ## Video demo
 Link: https://youtu.be/5DOYtY65IpU?si=Ae0PoLR6dJVxuvt3
