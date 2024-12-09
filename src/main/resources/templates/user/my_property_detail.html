@@ -10,9 +10,7 @@
         <div class="details">
             <div class="thumb">
                 <div class="big-image">
-                    <img th:if="${post.images != null and post.images.size() > 0}"
-                         th:src="@{'/images/' + ${post.images[0].url}}"
-                         alt="Post Image">
+                    <img th:src="@{'/images/' +${post.images[0].url}}" alt="">
                 </div>
                 <div class="small-images">
                     <th:block th:each="image, i:${post.images}">
@@ -75,7 +73,7 @@
                         <td th:text="${priceHistory.formattedDate}"></td>
                         <td th:text="${priceHistory.oldPrice}"></td>
                         <td th:text="${priceHistory.event}"></td>
-                        <td th:text="${priceHistory.user.role == 'ROLE_ADMIN' ? 'Admin ' + priceHistory.user.name : (priceHistory.user.role == 'ROLE_USER' ? 'User ' + priceHistory.user.name : priceHistory.user.name)}"></td>
+                        <td th:text="${priceHistory.user.role + ' ' + priceHistory.user.name}"></td>
                     </tr>
                     </tbody>
                 </table>
