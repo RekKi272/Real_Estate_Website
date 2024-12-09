@@ -41,7 +41,6 @@ public class ExcelExportServiceImpl implements ExcelExportService {
         // Populate data rows
         int rowNum = 1;
         for (UpdateLog updateLog : updateLogs) {
-            System.out.println(updateLog.toString() + "hahha");
             Row row = sheet.createRow(rowNum++);
             row.createCell(0).setCellValue(updateLog.getFormattedDate());
             row.createCell(1).setCellValue(updateLog.getProperty().getId());
